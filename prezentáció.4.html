@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. Lecke - Linkek és Képek</title>
+    <style>
+        /* GLOBÁLIS STÍLUSOK */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #000000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Prezentációs Keret */
+        .presentation-frame {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            height: 600px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 3px solid #1e3a8a;
+            overflow: hidden;
+        }
+
+        /* Diák Alaphelyzete */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Címsorok és Szövegek */
+        h1 {
+            font-size: 3.2rem;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 span {
+            color: #22c55e;
+        }
+
+        h2 {
+            font-size: 2.3rem;
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            border-left: 8px solid #22c55e;
+            padding-left: 15px;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #334155;
+            margin-bottom: 20px;
+        }
+
+        code {
+            background-color: #f1f5f9;
+            color: #1e3a8a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .code-block {
+            background-color: #000000;
+            color: #22c55e;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        /* Vezérlők */
+        .ui-container {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #15317e;
+        }
+
+        button.secondary {
+            background-color: #22c55e;
+        }
+
+        button.secondary:hover {
+            background-color: #16a34a;
+        }
+
+        .progress-indicator {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-frame">
+
+        <div class="slide active" id="slide-1">
+            <h1>Linkek és <span>Képek</span></h1>
+            <p style="text-align: center; font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">HTML Kurzus — 4. Lecke</p>
+            <p style="text-align: center; margin-top: 20px;">A világháló lényege az összekapcsolhatóság. Most megtanuljuk, hogyan készítsünk kattintható linkeket és hogyan jelenítsünk meg képeket.</p>
+        </div>
+
+        <div class="slide" id="slide-2">
+            <h2>1. A Hivatkozás: &lt;a&gt; tag</h2>
+            <p>A linkeket az <strong>Anchor</strong> (horgony) szóból az <code>&lt;a&gt;</code> címkével hozzuk létre.</p>
+            <p>De önmagában az, hogy <code>&lt;a&gt;Kattints ide&lt;/a&gt;</code> még nem elég, mert a böngésző nem tudja, hova kell irányítania a felhasználót. Szükségünk van egy attribútumra (tulajdonságra).</p>
+        </div>
+
+        <div class="slide" id="slide-3">
+            <h2>2. Az href attribútum</h2>
+            <p>A webcímet az <code>href</code> (Hypertext Reference) tulajdonságba írjuk a nyitó tagon belül:</p>
+            <div class="code-block">
+                &lt;a href="https://www.google.com"&gt;Itt a Google&lt;/a&gt;
+            </div>
+            <p style="margin-top: 15px;"><strong>Szabály:</strong> Az attribútum neve után egyenlőségjel jön, a pontos címet pedig mindig **idézőjelek közé** tesszük.</p>
+        </div>
+
+        <div class="slide" id="slide-4">
+            <h2>3. Megnyitás új lapon</h2>
+            <p>Alapértelmezés szerint a link átnavigál a saját oldalunkról. Ha azt szeretnéd, hogy egy külső oldal **új böngészőlapon** nyíljon meg, használd a <code>target="_blank"</code> attribútumot:</p>
+            <div class="code-block">
+                &lt;a href="https://google.com" target="_blank"&gt;Google új lapon&lt;/a&gt;
+            </div>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <h2>4. Képek beillesztése: &lt;img&gt;</h2>
+            <p>A képek megjelenítésére az <strong>Image</strong> szóból az <code>&lt;img&gt;</code> címkét használjuk.</p>
+            <p><strong>Rendkívül fontos szabály:</strong> az <code>&lt;img&gt;</code> tag egy **önzáró tag**! Nincs lezáró párja (nincs olyan, hogy &lt;/img&gt;).</p>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <h2>5. A kép forrása: src</h2>
+            <p>Ahhoz, hogy a kép megjelenjen, meg kell mondanunk az elérési útját vagy URL-jét. Erre szolgál az <code>src</code> (Source - forrás) attribútum:</p>
+            <div class="code-block">
+                &lt;img src="kepfajl.jpg"&gt;
+            </div>
+            <p style="margin-top: 15px;">Ez lehet egy internetes link is, vagy egy olyan kép, ami ugyanabban a mappában van, mint a HTML fájlunk.</p>
+        </div>
+
+        <div class="slide" id="slide-7">
+            <h2>6. A kötelező alt attribútum</h2>
+            <p>Az <code>alt</code> (Alternative text) egy alternatív leírás. Ha a kép nem tölt be, vagy vakok használják az oldalt felolvasó szoftverrel, ez a szöveg jelenik meg:</p>
+            <div class="code-block">
+                &lt;img src="kutya.jpg" alt="Egy vidám golden retriever"&gt;
+            </div>
+            <p style="margin-top: 15px;">A Google keresője is ez alapján tudja meg, hogy mi látható a képen, így keresőoptimalizálási szempontból is kötelező!</p>
+        </div>
+
+        <div class="slide" id="slide-8">
+            <h2>7. Méretezés: width és height</h2>
+            <p>A képek méretét szabályozhatjuk a <code>width</code> (szélesség) és <code>height</code> (magasság) attribútumokkal, képpontban (pixel) megadva:</p>
+            <div class="code-block">
+                &lt;img src="cica.jpg" alt="Cica" width="300" height="200"&gt;
+            </div>
+            <p style="margin-top: 15px;"><strong>Tipp:</strong> Ha csak az egyiket adod meg (pl. csak a szélességet), a böngésző automatikusan és arányosan kiszámolja a másikat, így nem torzul el a kép.</p>
+        </div>
+
+        <div class="slide" id="slide-9">
+            <h2>8. Kattintható kép készítése</h2>
+            <p>A HTML elemeket remekül lehet kombinálni. Ha egy képet beágyazol az <code>&lt;a&gt;</code> címkék közé, akkor a kép egy kattintható linkké válik!</p>
+            <div class="code-block">
+                &lt;a href="https://google.com"&gt;<br>
+                &nbsp;&nbsp;&lt;img src="logo.png" alt="Google Logo"&gt;<br>
+                &lt;/a&gt;
+            </div>
+        </div>
+
+        <div class="slide" id="slide-10">
+            <h2>9. Összefoglaló táblázat</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 1.1rem;">
+                <tr style="background-color: #1e3a8a; color: white;">
+                    <th style="padding: 10px;">Címke</th>
+                    <th style="padding: 10px;">Legfontosabb attribútumai</th>
+                    <th style="padding: 10px;">Típusa</th>
+                </tr>
+                <tr style="background-color: #f8fafc;">
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;"><code>&lt;a&gt;</code></td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;"><code>href</code>, <code>target</code></td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Páros tag</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;"><code>&lt;img&gt;</code></td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;"><code>src</code>, <code>alt</code>, <code>width</code></td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Önzáró tag</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="slide" id="slide-11">
+            <h2>10. Készülj a feladatokra!</h2>
+            <p>Most már vizuális elemekkel és külső hivatkozásokkal is fel tudod ruházni az oldalaidat.</p>
+            <p>A következő lépésben kapsz egy újabb **3 interaktív feladatból álló csomagot**, ahol élesben tesztelheted ezt a tudást.</p>
+            <p style="font-weight: bold; color: #22c55e; text-align: center; margin-top: 20px;">Nyomj a gombra a folytatáshoz!</p>
+        </div>
+
+    </div>
+
+    <div class="ui-container">
+        <div class="controls">
+            <button onclick="moveSlide(-1)">← Előző</button>
+            <div style="width: 20px;"></div>
+            <button class="secondary" onclick="moveSlide(1)">Következő →</button>
+        </div>
+        <div class="progress-indicator" id="progress">1 / 11 dia</div>
+    </div>
+
+    <script>
+        let activeIndex = 1;
+        const maxSlides = 11;
+
+        function moveSlide(step) {
+            let targetIndex = activeIndex + step;
+            if (targetIndex < 1 || targetIndex > maxSlides) return;
+            document.getElementById(`slide-${activeIndex}`).classList.remove('active');
+            activeIndex = targetIndex;
+            document.getElementById(`slide-${activeIndex}`).classList.add('active');
+            document.getElementById('progress').innerText = `${activeIndex} / ${maxSlides} dia`;
+        }
+    </script>
+</body>
+</html>

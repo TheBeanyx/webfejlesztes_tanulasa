@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nagy HTML Összefoglaló Kvíz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #000000;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 850px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #1e3a8a;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        h1 span {
+            color: #22c55e;
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 1.15rem;
+            color: #334155;
+            margin-bottom: 30px;
+        }
+
+        .topic-section {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .topic-title {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            border-left: 6px solid #22c55e;
+            padding-left: 10px;
+        }
+
+        .question-block {
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+
+        /* HIBÁS BLOKK STÍLUSA */
+        .question-block.wrong-answer {
+            background-color: #ef4444 !important; /* Piros háttér */
+            color: #ffffff !important;           /* Fehér szöveg */
+        }
+
+        .question-block.wrong-answer .question {
+            color: #ffffff !important;
+        }
+
+        .question {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .option {
+            display: block;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #000000;
+            transition: background-color 0.2s;
+        }
+
+        .option:hover {
+            background-color: #f1f5f9;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background-color: #22c55e;
+            color: #ffffff;
+            border: none;
+            padding: 18px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #16a34a;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+
+        .success { background-color: #dcfce7; color: #15803d; border: 2px solid #bbf7d0; }
+        .error { background-color: #fee2e2; color: #b91c1c; border: 2px solid #fca5a5; }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <h1>Nagy HTML <span>Összefoglaló Kvíz</span></h1>
+        <p class="intro">Tedd próbára a tudásod! Ha hibázol, a rendszer pirossal kiemeli a rontott kérdést.</p>
+
+        <div class="topic-section">
+            <div class="topic-title">1. Alapszerkezet (&lt;!DOCTYPE html&gt; és &lt;html&gt;)</div>
+            
+            <div class="question-block" id="block-q1">
+                <div class="question">1.1. Mi a feladata a legelső sorban álló &lt;!DOCTYPE html&gt; kódnak?</div>
+                <label class="option"><input type="radio" name="q1" value="A"> A) Ez egy HTML címke, ami elindítja a weboldal látható részét.</label>
+                <label class="option"><input type="radio" name="q1" value="B" id="correct-q1"> B) Ez egy utasítás a böngészőnek, hogy az oldal a modern HTML5 szabványt használja.</label>
+                <label class="option"><input type="radio" name="q1" value="C"> C) Ez határozza meg a weboldal háttérszínét.</label>
+            </div>
+
+            <div class="question-block" id="block-q2">
+                <div class="question">1.2. Melyik állítás igaz a &lt;html&gt; tagre?</div>
+                <label class="option"><input type="radio" name="q2" value="A" id="correct-q2"> A) Ez a dokumentum gyökere, minden más HTML kódnak ezen belül kell lennie.</label>
+                <label class="option"><input type="radio" name="q2" value="B"> B) Ezt a tagnak nem kötelező lezáró párt írni a fájl végén.</label>
+                <label class="option"><input type="radio" name="q2" value="C"> C) Ez a tag közvetlenül a body elemen belül helyezkedik el.</label>
+            </div>
+        </div>
+
+        <div class="topic-section">
+            <div class="topic-title">2. Láthatatlan és látható részek (&lt;head&gt;, &lt;title&gt;, &lt;style&gt; és &lt;body&gt;)</div>
+            
+            <div class="question-block" id="block-q3">
+                <div class="question">2.1. Mi a különbség a &lt;head&gt; és a &lt;body&gt; között?</div>
+                <label class="option"><input type="radio" name="q3" value="A"> A) A head a látható tartalom helye, a body-ba csak a háttérszínek jönnek.</label>
+                <label class="option"><input type="radio" name="q3" value="B" id="correct-q3"> B) A head az oldal láthatatlan agya (beállítások), míg a body tartalmaz minden látható elemet.</label>
+                <label class="option"><input type="radio" name="q3" value="C"> C) Mindkét rész megjelenik a képernyőn, nincs köztük funkcionális különbség.</label>
+            </div>
+
+            <div class="question-block" id="block-q4">
+                <div class="question">2.2. Hova kötelező elhelyezni a &lt;title&gt; és &lt;style&gt; címkéket?</div>
+                <label class="option"><input type="radio" name="q4" value="A" id="correct-q4"> A) Szigorúan a &lt;head&gt; szekción belülre.</label>
+                <label class="option"><input type="radio" name="q4" value="B"> B) Közvetlenül a &lt;body&gt; elejére.</label>
+                <label class="option"><input type="radio" name="q4" value="C"> C) A fájl legvégére, a &lt;/html&gt; után.</label>
+            </div>
+        </div>
+
+        <div class="topic-section">
+            <div class="topic-title">3. Címsorok hierarchiája (&lt;h1&gt; - &lt;h6&gt;)</div>
+            
+            <div class="question-block" id="block-q5">
+                <div class="question">3.1. Melyik a legkisebb prioritású (legkisebb méretű) címsor a HTML-ben?</div>
+                <label class="option"><input type="radio" name="q5" value="A"> A) &lt;h1&gt;</label>
+                <label class="option"><input type="radio" name="q5" value="B"> B) &lt;h0&gt;</label>
+                <label class="option"><input type="radio" name="q5" value="C" id="correct-q5"> C) &lt;h6&gt;</label>
+            </div>
+
+            <div class="question-block" id="block-q6">
+                <div class="question">3.2. Miért javasolt szigorúan csak egy darab &lt;h1&gt; tagot használni egy oldalon?</div>
+                <label class="option"><input type="radio" name="q6" value="A" id="correct-q6"> A) Mert ez az oldal főcíme, and a Google kereső ez alapján értékeli leginkább a témát.</label>
+                <label class="option"><input type="radio" name="q6" value="B"> B) Mert a böngésző összeomlik, ha kettőt talál belőle.</label>
+                <label class="option"><input type="radio" name="q6" value="C"> C) Mert a h1 tag automatikusan letiltja az utána következő szövegeket.</label>
+            </div>
+        </div>
+
+        <div class="topic-section">
+            <div class="topic-title">4. Bekezdések és sortörések (&lt;p&gt; és &lt;br&gt;)</div>
+            
+            <div class="question-block" id="block-q7">
+                <div class="question">4.1. Mit tesz a böngésző automatikusan, ha egy szöveget &lt;p&gt; tagok közé zárunk?</div>
+                <label class="option"><input type="radio" name="q7" value="A"> A) Vastaggá teszi a betűket.</label>
+                <label class="option"><input type="radio" name="q7" value="B" id="correct-q7"> B) Új bekezdést indít, és egy kis üres margót hagy alatta és felette.</label>
+                <label class="option"><input type="radio" name="q7" value="C"> C) Középre igazítja a teljes szöveget.</label>
+            </div>
+
+            <div class="question-block" id="block-q8">
+                <div class="question">4.2. Milyen különleges tulajdonsággal rendelkezik a sortörésre használt &lt;br&gt; tag?</div>
+                <label class="option"><input type="radio" name="q8" value="A" id="correct-q8"> A) Ez egy önzáró tag, nincs szüksége külön lezáró párra (&lt;/br&gt;).</label>
+                <label class="option"><input type="radio" name="q8" value="B"> B) Csak címsorokon belül használható.</label>
+                <label class="option"><input type="radio" name="q8" value="C"> C) Automatikusan kitörli az előtte lévő karaktereket.</label>
+            </div>
+        </div>
+
+        <div class="topic-section">
+            <div class="topic-title">5. Szövegközi kiemelések (&lt;strong&gt; és &lt;em&gt;)</div>
+            
+            <div class="question-block" id="block-q9">
+                <div class="question">5.1. Milyen vizuális és strukturális hatása van a &lt;strong&gt; tagnak?</div>
+                <label class="option"><input type="radio" name="q9" value="A"> A) Megváltoztatja a betűk színét zöldre.</label>
+                <label class="option"><input type="radio" name="q9" value="B" id="correct-q9"> B) Vastaggá teszi a szöveget, és jelzi a keresőmotoroknak, hogy fontos információról van szó.</label>
+                <label class="option"><input type="radio" name="q9" value="C"> C) Döltté teszi a kijelölt szót.</label>
+            </div>
+
+            <div class="question-block" id="block-q10">
+                <div class="question">5.2. Mire használjuk a modern webfejlesztésben az &lt;em&gt; tagot?</div>
+                <label class="option"><input type="radio" name="q10" value="A" id="correct-q10"> A) Hangsúlyos, dőlt betűs kiemelések létrehozására.</label>
+                <label class="option"><input type="radio" name="q10" value="B"> B) Új bekezdések nyitására.</label>
+                <label class="option"><input type="radio" name="q10" value="C"> C) Képek beillesztésére.</label>
+            </div>
+        </div>
+
+        <div class="topic-section">
+            <div class="topic-title">6. Listatípusok és elemeik (&lt;ul&gt;, &lt;ol&gt; és &lt;li&gt;)</div>
+            
+            <div class="question-block" id="block-q11">
+                <div class="question">6.1. Mi a különbség az &lt;ul&gt; és az &lt;ol&gt; fő listatagek között?</div>
+                <label class="option"><input type="radio" name="q11" value="A"> A) Az ul-t szövegekhez, az ol-t csak számok mentésére használjuk.</label>
+                <label class="option"><input type="radio" name="q11" value="B" id="correct-q11"> B) Az &lt;ul&gt; pontozott (rendezetlen), míg az &lt;ol&gt; számozott (rendezett) listát hoz létre.</label>
+                <label class="option"><input type="radio" name="q11" value="C"> C) Az ol tag automatikusan vastag betűssé alakítja a listát.</label>
+            </div>
+
+            <div class="question-block" id="block-q12">
+                <div class="question">6.2. Hogyan kell helyesen használni a konkrét lista elemeket jelölő &lt;li&gt; tagot?</div>
+                <label class="option"><input type="radio" name="q12" value="A"> A) Bárhol elhelyezhető a body-ban önállóan is.</label>
+                <label class="option"><input type="radio" name="q12" value="B"> B) Csak a head szekcióban kaphat helyet.</label>
+                <label class="option"><input type="radio" name="q12" value="C" id="correct-q12"> C) Kizárólag egy &lt;ul&gt; vagy egy &lt;ol&gt; konténeren belülre ágyazva szabad használni.</label>
+            </div>
+        </div>
+
+        <button onclick="evaluateGrandQuiz()">Kvíz Kiértékelése</button>
+        <div id="quizResult" class="result-box"></div>
+    </div>
+
+    <script>
+        function evaluateGrandQuiz() {
+            let score = 0;
+            const totalQuestions = 12;
+
+            // Kérdések listája a hozzájuk tartozó helyes bekötésekkel
+            const questions = [
+                { id: 'correct-q1', block: 'block-q1' },
+                { id: 'correct-q2', block: 'block-q2' },
+                { id: 'correct-q3', block: 'block-q3' },
+                { id: 'correct-q4', block: 'block-q4' },
+                { id: 'correct-q5', block: 'block-q5' },
+                { id: 'correct-q6', block: 'block-q6' },
+                { id: 'correct-q7', block: 'block-q7' },
+                { id: 'correct-q8', block: 'block-q8' },
+                { id: 'correct-q9', block: 'block-q9' },
+                { id: 'correct-q10', block: 'block-q10' },
+                { id: 'correct-q11', block: 'block-q11' },
+                { id: 'correct-q12', block: 'block-q12' }
+            ];
+
+            // Alaphelyzet visszaállítása (minden piros kiemelés törlése az új ellenőrzés előtt)
+            questions.forEach(q => {
+                document.getElementById(q.block).classList.remove('wrong-answer');
+            });
+
+            // Ellenőrzés és a hibásak egyedi megjelölése
+            questions.forEach(q => {
+                if (document.getElementById(q.id).checked) {
+                    score++;
+                } else {
+                    // Ha nem a jót jelölte be, megkapja a hibás osztályt (piros háttér)
+                    document.getElementById(q.block).classList.add('wrong-answer');
+                }
+            });
+
+            const resultBox = document.getElementById('quizResult');
+            resultBox.style.display = "block";
+
+            if (score === totalQuestions) {
+                resultBox.className = "result-box success";
+                resultBox.innerText = `Tökéletes! Elért pontszám: ${score} / ${totalQuestions}. Hibátlanul tudsz mindent az eddigi anyagokból!`;
+            } else {
+                resultBox.className = "result-box error";
+                resultBox.innerText = `Elért pontszám: ${score} / ${totalQuestions}. A pirossal megjelölt kérdésekre hibás választ adtál, javítsd őket!`;
+            }
+        }
+    </script>
+</body>
+</html>

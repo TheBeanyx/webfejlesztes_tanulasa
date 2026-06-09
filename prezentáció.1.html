@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Struktúra Kurzus</title>
+    <style>
+        /* GLOBÁLIS STÍLUSOK (Fehér, Fekete, Zöld és Kék téma) */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #000000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Prezentációs Keret */
+        .presentation-frame {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            height: 600px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 3px solid #1e3a8a; /* Kék keret */
+            overflow: hidden;
+        }
+
+        /* Diák Alaphelyzete (Animációhoz előkészítve) */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        /* Aktív Dia Animációja (Alulról felfelé beúszás) */
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Címsorok és Szövegek */
+        h1 {
+            font-size: 3.5rem;
+            color: #1e3a8a; /* Kék */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 span {
+            color: #22c55e; /* Zöld */
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            border-left: 8px solid #22c55e;
+            padding-left: 15px;
+        }
+
+        p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #334155;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #000000;
+        }
+
+        /* Kód Kiemelések */
+        code {
+            background-color: #f1f5f9;
+            color: #22c55e;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1.15rem;
+            border: 1px solid #cbd5e1;
+        }
+
+        .code-block {
+            background-color: #000000;
+            color: #22c55e;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            box-shadow: inset 0 0 10px rgba(0,200,0,0.2);
+            margin-top: 15px;
+        }
+
+        .code-block span {
+            color: #38bdf8;
+        }
+
+        /* Táblázat Stílus */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            padding: 12px;
+            text-align: left;
+            font-size: 1.2rem;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 1.1rem;
+            color: #000000;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* Vezérlő Gombok és Info */
+        .ui-container {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #15317e;
+        }
+
+        button.secondary {
+            background-color: #22c55e;
+        }
+
+        button.secondary:hover {
+            background-color: #16a34a;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .progress-indicator {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-frame">
+
+        <div class="slide active" id="slide-1">
+            <h1>HTML Kód <span>Felépítése</span></h1>
+            <p style="text-align: center; font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">A Webfejlesztés Mesterkurzusa — 1. Lecke</p>
+            <p style="text-align: center; margin-top: 20px;">Tanuld meg a weboldalak szerkezetét a nulláról, lépésről lépésre, összesen 13 animált dián keresztül!</p>
+        </div>
+
+        <div class="slide" id="slide-2">
+            <h2>1. Mi az a HTML?</h2>
+            <p>A HTML a <strong>HyperText Markup Language</strong> (Hipertextes Jelölőnyelv) rövidítése.</p>
+            <p>Ez nem egy klasszikus programozási nyelv (nem végez számításokat), hanem egy <strong>szerkezeti nyelv</strong>. Olyan, mint egy ház tervrajza vagy az emberi test csontváza: meghatározza, hogy mi hova kerüljön az oldalon.</p>
+        </div>
+
+        <div class="slide" id="slide-3">
+            <h2>2. A Legelső Sor: DOCTYPE</h2>
+            <p>Minden modern HTML fájlnak ezzel a pontos sorral kell kezdődnie:</p>
+            <div class="code-block">&lt;!DOCTYPE html&gt;</div>
+            <p style="margin-top: 15px;">Ez nem egy HTML címke (tag), hanem egy jelzés a böngészőnek. Azt üzeni, hogy a fájl a legfrissebb, szabványos <strong>HTML5</strong> verziót használja, így az oldal hibátlanul fog megjelenni.</p>
+        </div>
+
+        <div class="slide" id="slide-4">
+            <h2>3. A Gyökér: &lt;html&gt;</h2>
+            <p>A doctype után megnyitjuk a dokumentum valódi gyökerét a <code>&lt;html&gt;</code> címkével.</p>
+            <p>Ez a "legkülső doboz". Minden más kódnak (szövegnek, dizájnnak, beállításnak) kötelezően ezen belül kell elhelyezkednie.</p>
+            <p>Gyakran kiegészítjük a nyelv megadásával is: <code>&lt;html lang="hu"&gt;</code>.</p>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <h2>4. Az Oldal Agya: &lt;head&gt;</h2>
+            <p>A html elemen belül az első nagy egység a <code>&lt;head&gt;</code> (fej) rész.</p>
+            <p>Ez a szekció <strong>teljesen láthatatlan</strong> a weboldal látogatói számára. Itt tároljuk azokat a háttér-információkat és technikai beállításokat, amik a böngésző és a keresőmotorok (pl. Google) számára fontosak.</p>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <h2>5. A Weboldal Neve: &lt;title&gt;</h2>
+            <p>A <code>&lt;head&gt;</code> szekció kötelező eleme a <code>&lt;title&gt;</code> címke.</p>
+            <p>Az ide írt szöveg határozza meg, hogy mi jelenjen meg a böngésző legfelső fülén (tab), illetve ezt a címet mutatja meg a Google is a találati listájában.</p>
+            <div class="code-block">&lt;title&gt;<span>Az Én Első Weboldalam</span>&lt;/title&gt;</div>
+        </div>
+
+        <div class="slide" id="slide-7">
+            <h2>6. A Dizájn Otthona: &lt;style&gt;</h2>
+            <p>Ha azt akarjuk, hogy a weboldalunk ne egy unalmas fehér lap legyen, a <code>&lt;head&gt;</code>-en belül meg kell nyitnunk egy <code>&lt;style&gt;</code> részt.</p>
+            <p>Ide írjuk a CSS kódokat. Itt határozzuk meg a háttérszíneket, a betűk méretét, a kereteket és az elrendezéseket.</p>
+        </div>
+
+        <div class="slide" id="slide-8">
+            <h2>7. A Látható Világ: &lt;body&gt;</h2>
+            <p>A head lezárása után következik a weboldal legfontosabb része: a <code>&lt;body&gt;</code> (test).</p>
+            <p><strong>Minden, amit ezen a két tagon belülre írsz, meg fog jelenni a képernyőn!</strong> Ide kerülnek a valódi tartalmak: szövegek, bekezdések, gombok, táblázatok és képek.</p>
+        </div>
+
+        <div class="slide" id="slide-9">
+            <h2>8. Címek és Bekezdések</h2>
+            <p>A <code>&lt;body&gt;</code>-n belül a leggyakrabban használt elemek:</p>
+            <ul>
+                <li><code>&lt;h1&gt;</code>-től <code>&lt;h6&gt;</code>-ig: Címsorok (a h1 a legnagyobb főcím).</li>
+                <li><code>&lt;p&gt;</code>: Bekezdések (ide írjuk a normál folyószöveget).</li>
+                <li><code>&lt;button&gt;</code>: Kattintható gombok létrehozása.</li>
+            </ul>
+        </div>
+
+        <div class="slide" id="slide-10">
+            <h2>9. Hogyan Zárjuk le a Címkéket?</h2>
+            <p>A HTML-ben a legtöbb elem egy <strong>nyitó taggel</strong> kezdődik és egy <strong>záró taggel</strong> végződik. A záró tagben mindig van egy perjel (<code>/</code>) a név előtt.</p>
+            <p>Például: <code>&lt;p&gt;</code>Nyitás — tartalom — <code>&lt;/p&gt;</code>Zárás.</p>
+            <p>Ha elfelejted bezárni a címkéket, a böngésző összezavarodik, és elromlik a weboldalad kinézete!</p>
+        </div>
+
+        <div class="slide" id="slide-11">
+            <h2>10. Gyors Áttekintés</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Címke neve</th>
+                        <th>Hova tartozik?</th>
+                        <th>Látható a képernyőn?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>&lt;head&gt;</code></td>
+                        <td>A html gyermeke</td>
+                        <td>Nem (A háttérben fut)</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;title&gt;</code></td>
+                        <td>A head-en belül van</td>
+                        <td>Csak a böngésző fülén</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;style&gt;</code></td>
+                        <td>A head-en belül van</td>
+                        <td>Nem, de formázza az oldalt</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;body&gt;</code></td>
+                        <td>A head után jön</td>
+                        <td>Igen, minden itt jelenik meg</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slide" id="slide-12">
+            <h2>11. A Fájl Legvége: &lt;/html&gt;</h2>
+            <p>Amikor minden beállítást megadtál a head-ben, és minden szöveget megírtál a body-ban, le kell zárnod az egész fájlt.</p>
+            <p>A kódod legeslegutolsó sora kötelezően a <code>&lt;/html&gt;</code> kell, hogy legyen. Ez jelzi a számítógépnek, hogy a dokumentumnak vége, nincs több beolvasandó kód.</p>
+        </div>
+
+        <div class="slide" id="slide-13">
+            <h2>12. Íme a Teljes Szerkezet!</h2>
+            <p>Ha mindent jól csináltál, az üres weboldalad alapváza pontosan így néz ki:</p>
+            <div class="code-block">
+                &lt;!DOCTYPE html&gt;<br>
+                &lt;html lang="hu"&gt;<br>
+                &nbsp;&nbsp;&lt;head&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Cím&lt;/title&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;style&gt; /* Dizájn */ &lt;/style&gt;<br>
+                &nbsp;&nbsp;&lt;/head&gt;<br>
+                &nbsp;&nbsp;&lt;body&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Tartalom&lt;/h1&gt;<br>
+                &nbsp;&nbsp;&lt;/body&gt;<br>
+                &lt;/html&gt;
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ui-container">
+        <div class="controls">
+            <button onclick="moveSlide(-1)">← Előző</button>
+            <div style="width: 20px;"></div>
+            <button class="secondary" onclick="moveSlide(1)">Következő →</button>
+        </div>
+        <div class="progress-indicator" id="progress">1 / 13 dia</div>
+    </div>
+
+    <script>
+        let activeIndex = 1;
+        const maxSlides = 13;
+
+        function moveSlide(step) {
+            let targetIndex = activeIndex + step;
+
+            // Határok ellenőrzése
+            if (targetIndex < 1 || targetIndex > maxSlides) return;
+
+            // Régi dia elrejtése
+            document.getElementById(`slide-${activeIndex}`).classList.remove('active');
+
+            // Új index beállítása
+            activeIndex = targetIndex;
+
+            // Új dia megjelenítése (beindul a CSS animáció)
+            document.getElementById(`slide-${activeIndex}`).classList.add('active');
+
+            // Számláló frissítése
+            document.getElementById('progress').innerText = `${activeIndex} / ${maxSlides} dia`;
+        }
+    </script>
+
+</body>
+</html>

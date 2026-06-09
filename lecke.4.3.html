@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. Lecke - Teljes Kódsor Írása</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #000000;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .challenge-container {
+            width: 100%;
+            max-width: 850px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #1e3a8a;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        h1 span {
+            color: #22c55e;
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #334155;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #1e3a8a;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #334155;
+            margin-bottom: 15px;
+        }
+
+        .task-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .input-area {
+            width: 100%;
+            background-color: #000000;
+            border: 2px solid #334155;
+            color: #22c55e;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            padding: 15px;
+            border-radius: 8px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .input-area:focus {
+            border-color: #22c55e;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background-color: #22c55e;
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #16a34a;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+
+        .success { background-color: #dcfce7; color: #15803d; border: 2px solid #bbf7d0; }
+        .error { background-color: #fee2e2; color: #b91c1c; border: 2px solid #fca5a5; }
+    </style>
+</head>
+<body>
+
+    <div class="challenge-container">
+        <h1>Profi Gyakorlat: <span>5 Teljes Kódsor</span></h1>
+        <p class="intro">Írd be a teljes HTML kódsort a megadott adatok alapján a fekete mezőkbe!</p>
+
+        <h2>1. Feladat: Cica kép beillesztése</h2>
+        <div class="task-box">
+            <p><strong>Adatok:</strong> Kép neve: <code>cica.png</code>, Szélesség: <code>200</code>, Magasság: <code>150</code>, Alternatív szöveg: <code>Kiscica</code></p>
+        </div>
+        <input type="text" id="task1" class="input-area" placeholder='Pl: <img src="..." alt="..." ...>'>
+
+        <h2>2. Feladat: Kutya kép beillesztése</h2>
+        <div class="task-box">
+            <p><strong>Adatok:</strong> Kép neve: <code>kutya.jpg</code>, Szélesség: <code>400</code>, Magasság: <code>300</code>, Alternatív szöveg: <code>Hűséges kutya</code></p>
+        </div>
+        <input type="text" id="task2" class="input-area" placeholder="Írd ide a teljes img kódsort...">
+
+        <h2>3. Feladat: Egyszerű YouTube link</h2>
+        <div class="task-box">
+            <p><strong>Adatok:</strong> Webcím: <code>https://youtube.com</code>, Kattintható szöveg: <code>Kattints ide</code> (Nem kell új lapra tenni)</p>
+        </div>
+        <input type="text" id="task3" class="input-area" placeholder='Pl: <a href="...">Szöveg</a>'>
+
+        <h2>4. Feladat: Google link új lapon</h2>
+        <div class="task-box">
+            <p><strong>Adatok:</strong> Webcím: <code>https://google.com</code>, Kattintható szöveg: <code>Keresés</code>, Megnyitás: **Új lapon**</p>
+        </div>
+        <input type="text" id="task4" class="input-area" placeholder="Írd ide a teljes a kódsort attribútumokkal...">
+
+        <h2>5. Feladat: Autó kép csak szélességgel</h2>
+        <div class="task-box">
+            <p><strong>Adatok:</strong> Kép neve: <code>auto.jpg</code>, Szélesség: <code>500</code>, Alternatív szöveg: <code>Gyors autó</code> (Magasságot ne adj meg!)</p>
+        </div>
+        <input type="text" id="task5" class="input-area" placeholder="Írd ide a teljes img kódsort...">
+
+        <button onclick="validateFullLines()">Kódsorok Ellenőrzése</button>
+        <div id="resultBox" class="result-box"></div>
+    </div>
+
+    <script>
+        function cleanString(str) {
+            // Eltávolítja a felesleges szóközöket és egységesíti az idézőjeleket az ellenőrzéshez
+            return str.trim().replace(/\s+/g, ' ').replace(/"/g, "'").toLowerCase();
+        }
+
+        function validateFullLines() {
+            const t1 = cleanString(document.getElementById('task1').value);
+            const t2 = cleanString(document.getElementById('task2').value);
+            const t3 = cleanString(document.getElementById('task3').value);
+            const t4 = cleanString(document.getElementById('task4').value);
+            const t5 = cleanString(document.getElementById('task5').value);
+
+            // Rugalmasabb ellenőrzés (az attribútumok sorrendje eltérhet, ezért tartalmazás alapján nézzük)
+            const f1 = t1.startsWith("<img") && t1.endsWith(">") && t1.includes("src='cica.png'") && t1.includes("width='200'") && t1.includes("height='150'") && t1.includes("alt='kiscica'");
+            const f2 = t2.startsWith("<img") && t2.endsWith(">") && t2.includes("src='kutya.jpg'") && t2.includes("width='400'") && t2.includes("height='300'") && t2.includes("alt='hűséges kutya'");
+            const f3 = t3 === "<a href='https://youtube.com'>kattints ide</a>";
+            const f4 = t4.startsWith("<a") && t4.endsWith("</a>") && t4.includes("href='https://google.com'") && t4.includes("target='_blank'") && t4.includes(">keresés");
+            const f5 = t5.startsWith("<img") && t5.endsWith(">") && t5.includes("src='auto.jpg'") && t5.includes("width='500'") && t5.includes("alt='gyors autó'") && !t5.includes("height");
+
+            const result = document.getElementById('resultBox');
+            result.style.display = "block";
+
+            if (f1 && f2 && f3 && f4 && f5) {
+                result.className = "result-box success";
+                result.innerText = "Hihetetlen! Mind az 5 teljes kódsort tökéletesen, hiba nélkül megírtad! Igazi programozó vagy.";
+            } else {
+                result.className = "result-box error";
+                result.innerText = "Valamelyik sorban elírás van. Ellenőrizd a kacsacsőröket (< >), az egyenlőségjeleket, az idézőjeleket és a pontos fájlneveket/szövegeket!";
+            }
+        }
+    </script>
+</body>
+</html>

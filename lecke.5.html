@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Lecke - Gyakorló Feladatok</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #000000;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .challenge-container {
+            width: 100%;
+            max-width: 850px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #1e3a8a;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: #22c55e;
+        }
+
+        h2 {
+            color: #1e3a8a;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #334155;
+            margin-bottom: 15px;
+        }
+
+        /* Kódblokk és bevitelek */
+        .code-sandbox {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .code-sandbox input {
+            background-color: #1e293b;
+            border: 2px solid #334155;
+            color: #22c55e;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            width: 100px;
+            font-weight: bold;
+            text-align: center;
+            outline: none;
+        }
+
+        .code-sandbox input:focus {
+            border-color: #22c55e;
+        }
+
+        /* Kvíz opciók */
+        .quiz-option {
+            display: block;
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-size: 1.05rem;
+        }
+
+        .quiz-option:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* Igaz/Hamis rész */
+        .tf-container {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .tf-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+                color: #334155;
+        }
+
+        .tf-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Gomb */
+        button {
+            display: block;
+            width: 100%;
+            background-color: #22c55e;
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #16a34a;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+
+        .success { background-color: #dcfce7; color: #15803d; border: 2px solid #bbf7d0; }
+        .error { background-color: #fee2e2; color: #b91c1c; border: 2px solid #fca5a5; }
+    </style>
+</head>
+<body>
+
+    <div class="challenge-container">
+        <h1>5. Lecke: HTML Táblázatok <span>Gyakorlat</span></h1>
+        <p>Oldd meg a lenti 3 feladatot a lecke alapján, majd kattints az ellenőrzés gombra!</p>
+
+        <h2>1. Feladat: Táblázat vázának kiegészítése</h2>
+        <p>Egészítsd ki a kódot a megfelelő tagpárokkal úgy, hogy egy szabályos egyoszlopoos, egysoros (fejléces) táblázatot kapj!</p>
+        
+        <div class="code-sandbox">
+            <input type="text" id="ex5_1_1" placeholder="nyitás"><br>
+            &nbsp;&nbsp;<input type="text" id="ex5_1_2" placeholder="sor nyitása"><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Név&lt;/th&gt;<br>
+            &nbsp;&nbsp;&lt;/tr&gt;<br>
+            <input type="text" id="ex5_1_3" placeholder="lezárás">
+        </div>
+
+        <h2>2. Feladat: Melyik tag mit csinál?</h2>
+        <p>Melyik címke felelős a táblázat egy **sima vízszintes sorának** elindításáért?</p>
+        
+        <label class="quiz-option">
+            <input type="radio" name="tablequiz" value="A"> A. &lt;td&gt;
+        </label>
+        <label class="quiz-option">
+            <input type="radio" name="tablequiz" value="B" id="ex5_2_correct"> B. &lt;tr&gt;
+        </label>
+        <label class="quiz-option">
+            <input type="radio" name="tablequiz" value="C"> C. &lt;th&gt;
+        </label>
+
+        <h2>3. Feladat: Igaz vagy Hamis?</h2>
+        <p>Döntsd el, hogy az állítások igazak (I) vagy hamisak (H) a HTML táblázatokra vonatkozóan!</p>
+        
+        <div class="tf-container">
+            <div class="tf-row">
+                <span>1. A <code>&lt;th&gt;</code> tagbe írt szövegeket a böngésző magától félkövérré teszi.</span>
+                <select id="ex5_3_1">
+                    <option value="">Válassz...</option>
+                    <option value="I">Igaz (I)</option>
+                    <option value="H">Hamis (H)</option>
+                </select>
+            </div>
+            <div class="tf-row">
+                <span>2. A <code>&lt;td&gt;</code> cellákat el lehet helyezni közvetlenül a <code>&lt;table&gt;</code>-ben is, nem muszáj <code>&lt;tr&gt;</code>-be tenni őket.</span>
+                <select id="ex5_3_2">
+                    <option value="">Válassz...</option>
+                    <option value="I">Igaz (I)</option>
+                    <option value="H">Hamis (H)</option>
+                </select>
+            </div>
+            <div class="tf-row">
+                <span>3. Ha az első sorban 3 cella van, akkor a többi sorba is célszerű 3 cellát tenni, különben lyukas lesz a táblázat oldala.</span>
+                <select id="ex5_3_3">
+                    <option value="">Válassz...</option>
+                    <option value="I">Igaz (I)</option>
+                    <option value="H">Hamis (H)</option>
+                </select>
+            </div>
+        </div>
+
+        <button onclick="validateLesson5()">Feladatok Ellenőrzése</button>
+        <div id="resultBox" class="result-box"></div>
+    </div>
+
+    <script>
+        function validateLesson5() {
+            // 1. Feladat adatok
+            const r1 = document.getElementById('ex5_1_1').value.trim().toLowerCase();
+            const r2 = document.getElementById('ex5_1_2').value.trim().toLowerCase();
+            const r3 = document.getElementById('ex5_1_3').value.trim().toLowerCase();
+
+            // 2. Feladat adatok
+            const r4 = document.getElementById('ex5_2_correct').checked;
+
+            // 3. Feladat adatok
+            const r5 = document.getElementById('ex5_3_1').value;
+            const r6 = document.getElementById('ex5_3_2').value;
+            const r7 = document.getElementById('ex5_3_3').value;
+
+            const result = document.getElementById('resultBox');
+
+            // Kiértékelés
+            const f1_ok = (r1 === '<table>') && (r2 === '<tr>') && (r3 === '</table>');
+            const f2_ok = r4;
+            const f3_ok = (r5 === 'I') && (r6 === 'H') && (r7 === 'I');
+
+            if (f1_ok && f2_ok && f3_ok) {
+                result.className = "result-box success";
+                result.innerText = "Tökéletes! Mind a 3 feladat hibátlan lett. Nagyon jól átlátod a táblázatok logikai struktúráját!";
+                result.style.display = "block";
+            } else {
+                result.className = "result-box error";
+                result.innerText = "Valamelyik válasz még hibás. Nézd át a kacsacsőröket az 1. feladatban, ellenőrizd a kvízt vagy az igaz/hamis opciókat!";
+                result.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>s

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Lecke - HTML Táblázatok</title>
+    <style>
+        /* GLOBÁLIS STÍLUSOK */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #000000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Prezentációs Keret */
+        .presentation-frame {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            height: 600px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 3px solid #1e3a8a;
+            overflow: hidden;
+        }
+
+        /* Diák Alaphelyzete */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Címsorok és Szövegek */
+        h1 {
+            font-size: 3.2rem;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 span {
+            color: #22c55e;
+        }
+
+        h2 {
+            font-size: 2.3rem;
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            border-left: 8px solid #22c55e;
+            padding-left: 15px;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #334155;
+            margin-bottom: 20px;
+        }
+
+        code {
+            background-color: #f1f5f9;
+            color: #1e3a8a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .code-block {
+            background-color: #000000;
+            color: #22c55e;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Bemutató táblázat stílus */
+        .demo-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.1rem;
+        }
+        .demo-table th {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+        }
+        .demo-table td {
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            text-align: center;
+        }
+
+        /* Vezérlők */
+        .ui-container {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #15317e;
+        }
+
+        button.secondary {
+            background-color: #22c55e;
+        }
+
+        button.secondary:hover {
+            background-color: #16a34a;
+        }
+
+        .progress-indicator {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-frame">
+
+        <div class="slide active" id="slide-1">
+            <h1>HTML <span>Táblázatok</span></h1>
+            <p style="text-align: center; font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">HTML Kurzus — 5. Lecke</p>
+            <p style="text-align: center; margin-top: 20px;">Adatok strukturált, rácsos megjelenítése. Megtanuljuk a táblázatok logikai felépítését sorról sorra.</p>
+        </div>
+
+        <div class="slide" id="slide-2">
+            <h2>1. A táblázat alapja: &lt;table&gt;</h2>
+            <p>Minden táblázatot a <code>&lt;table&gt;</code> taggel nyitunk meg, és a <code>&lt;/table&gt;</code> taggel zárunk be.</p>
+            <p>Ez a fő konténer. Önmagában még nem mutat semmit, ez jelzi a böngészőnek, hogy a belsejében egy rácsszerkezet fog felépülni.</p>
+        </div>
+
+        <div class="slide" id="slide-3">
+            <h2>2. Sorok létrehozása: &lt;tr&gt;</h2>
+            <p>A HTML-ben a táblázatokat **szigorúan soronként** építjük fel, fentről lefelé haladva.</p>
+            <p>Egy-egy sort a <strong>Table Row</strong> (táblázat sor) rövidítéséből a <code>&lt;tr&gt;</code> címkével hozunk létre. Ahány sor kell, annyi <code>&lt;tr&gt;</code> blokkot kell egymás alá írnunk.</p>
+        </div>
+
+        <div class="slide" id="slide-4">
+            <h2>3. Címsor cellák: &lt;th&gt;</h2>
+            <p>A táblázat legelső sora általában a fejléc (pl. Név, Kor, Város). Az ide tartozó cellákat a <strong>Table Header</strong> (táblázat fejléc) rövidítéséből a <code>&lt;th&gt;</code> tagbe tesszük.</p>
+            <p>A böngésző a <code>&lt;th&gt;</code> cellák tartalmát **automatikusan vastag betűvel és középre igazítva** jeleníti meg.</p>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <h2>4. Sima adatcellák: &lt;td&gt;</h2>
+            <p>A többi sorban a normál adatokat tartalmazó cellákat a <strong>Table Data</strong> (táblázat adat) rövidítéséből a <code>&lt;td&gt;</code> tagok közé írjuk.</p>
+            <p><strong>Arany szabály:</strong> Mind a <code>&lt;th&gt;</code>, mind a <code>&lt;td&gt;</code> cellákat **mindig a sorokon (&lt;tr&gt;) belülre** kell ágyazni!</p>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <h2>5. Egy egyszerű táblázat kódja</h2>
+            <div class="code-block">
+                &lt;table&gt;<br>
+                &nbsp;&nbsp;&lt;tr&gt; &lt;!-- 1. sor (Fejléc) --&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Termék&lt;/th&gt; &lt;th&gt;Ár&lt;/th&gt;<br>
+                &nbsp;&nbsp;&lt;/tr&gt;<br>
+                &nbsp;&nbsp;&lt;tr&gt; &lt;!-- 2. sor (Adat) --&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Alma&lt;/td&gt; &lt;td&gt;500 Ft&lt;/td&gt;<br>
+                &nbsp;&nbsp;&lt;/tr&gt;<br>
+                &lt;/table&gt;
+            </div>
+        </div>
+
+        <div class="slide" id="slide-7">
+            <h2>6. Így néz ki a gyakorlatban</h2>
+            <p>Az előző oldalon bemutatott kód pontosan ezt a rácsot eredményezi:</p>
+            <div class="example-box">
+                <table class="demo-table">
+                    <tr>
+                        <th>Termék</th>
+                        <th>Ár</th>
+                    </tr>
+                    <tr>
+                        <td>Alma</td>
+                        <td>500 Ft</td>
+                    </tr>
+                </table>
+            </div>
+            <p style="margin-top: 15px; font-size: 1.1rem;">Látható, hogy a fejléc magától kiemelkedik a sima adatcellákhoz képest.</p>
+        </div>
+
+        <div class="slide" id="slide-8">
+            <h2>7. Cella-szintek egyezése</h2>
+            <p>Nagyon fontos, hogy minden sorban (`<tr>`) **ugyanannyi darab cella** (`<td>` vagy `<th>`) legyen! </p>
+            <p>Ha az első sorba 3 fejlécet teszel, a második sorba pedig csak 2 adatcellát, a táblázat utolsó oszlopa "lyukas" lesz, ami elrontja a dizájnt.</p>
+        </div>
+
+        <div class="slide" id="slide-9">
+            <h2>8. Összefoglalás</h2>
+            <ul>
+                <li style="margin-bottom: 10px;"><code>&lt;table&gt;</code> : A teljes táblázat kerete.</li>
+                <li style="margin-bottom: 10px;"><code>&lt;tr&gt;</code> : Egy vízszintes sor.</li>
+                <li style="margin-bottom: 10px;"><code>&lt;th&gt;</code> : Fejléc cella (vastag, középre zárt).</li>
+                <li style="margin-bottom: 10px;"><code>&lt;td&gt;</code> : Sima adatcella.</li>
+            </ul>
+        </div>
+
+        <div class="slide" id="slide-10">
+            <h2>9. Felkészültél a gyakorlásra?</h2>
+            <p>A táblázatok logikája kicsit több egymásba ágyazást igényel, de ha megérted a <strong>Table -> Row -> Cell</strong> sorrendet, nem lesz nehéz!</p>
+            <p>Ha készen állsz, indítjuk a gyakorló feladatokat, hogy rögzítsük a tudást.</p>
+            <p style="font-weight: bold; color: #22c55e; text-align: center; margin-top: 20px;">Nyomj a gombra a feladatokhoz!</p>
+        </div>
+
+    </div>
+
+    <div class="ui-container">
+        <div class="controls">
+            <button onclick="moveSlide(-1)">← Előző</button>
+            <div style="width: 20px;"></div>
+            <button class="secondary" onclick="moveSlide(1)">Következő →</button>
+        </div>
+        <div class="progress-indicator" id="progress">1 / 10 dia</div>
+    </div>
+
+    <script>
+        let activeIndex = 1;
+        const maxSlides = 10;
+
+        function moveSlide(step) {
+            let targetIndex = activeIndex + step;
+            if (targetIndex < 1 || targetIndex > maxSlides) return;
+            document.getElementById(`slide-${activeIndex}`).classList.remove('active');
+            activeIndex = targetIndex;
+            document.getElementById(`slide-${activeIndex}`).classList.add('active');
+            document.getElementById('progress').innerText = `${activeIndex} / ${maxSlides} dia`;
+        }
+    </script>
+</body>
+</html>

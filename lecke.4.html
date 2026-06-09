@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. Lecke - Gyakorló Feladatok</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #000000;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .challenge-container {
+            width: 100%;
+            max-width: 850px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #1e3a8a;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: #22c55e;
+        }
+
+        h2 {
+            color: #1e3a8a;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #334155;
+            margin-bottom: 15px;
+        }
+
+        /* Kódblokk és bevitelek */
+        .code-sandbox {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .code-sandbox input {
+            background-color: #1e293b;
+            border: 2px solid #334155;
+            color: #22c55e;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            width: 140px;
+            font-weight: bold;
+            text-align: center;
+            outline: none;
+        }
+
+        .code-sandbox input:focus {
+            border-color: #22c55e;
+        }
+
+        /* Kvíz opciók */
+        .quiz-option {
+            display: block;
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-size: 1.05rem;
+        }
+
+        .quiz-option:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* Igaz/Hamis rész */
+        .tf-container {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .tf-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .tf-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Gomb */
+        button {
+            display: block;
+            width: 100%;
+            background-color: #22c55e;
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #16a34a;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+
+        .success { background-color: #dcfce7; color: #15803d; border: 2px solid #bbf7d0; }
+        .error { background-color: #fee2e2; color: #b91c1c; border: 2px solid #fca5a5; }
+    </style>
+</head>
+<body>
+
+    <div class="challenge-container">
+        <h1>4. Lecke: Linkek és Képek <span>Gyakorlat</span></h1>
+        <p>Oldd meg a lenti 3 feladatot a lecke alapján, majd kattints az ellenőrzés gombra!</p>
+
+        <h2>1. Feladat: Attribútumok megadása</h2>
+        <p>Egészítsd ki a hiányzó kulcsszavakat (attribútumokat) a kódban, hogy a hivatkozás és a kép is működjön!</p>
+        
+        <div class="code-sandbox">
+            &lt;a <input type="text" id="ex4_1_1" placeholder="hivatkozás_attribútum">="https://google.com" target="_blank"&gt;Kereső&lt;/a&gt;<br>
+            &lt;img <input type="text" id="ex4_1_2" placeholder="kép_forrás_attribútum">="cica.jpg" <input type="text" id="ex4_1_3" placeholder="alternatív_szöveg">="Egy aranyos kiscica"&gt;
+        </div>
+
+        <h2>2. Feladat: Címkék lezárása (Kvíz)</h2>
+        <p>Melyik állítás igaz a kép beillesztésére használt &lt;img&gt; tagre?</p>
+        
+        <label class="quiz-option">
+            <input type="radio" name="imgquiz" value="A"> A. Kötelező mögé írni a &lt;/img&gt; lezáró párját, különben nem jelenik meg.
+        </label>
+        <label class="quiz-option">
+            <input type="radio" name="imgquiz" value="B" id="ex4_2_correct"> B. Ez egy önzáró tag, nincs külön lezáró párja, magában áll.
+        </label>
+        <label class="quiz-option">
+            <input type="radio" name="imgquiz" value="C"> C. Csak egy &lt;a&gt; tagon belül létezhet, önállóan nem használható.
+        </label>
+
+        <h2>3. Feladat: Igaz vagy Hamis?</h2>
+        <p>Döntsd el, hogy az állítások igazak (I) vagy hamisak (H) a linkekre és képekre vonatkozóan!</p>
+        
+        <div class="tf-container">
+            <div class="tf-row">
+                <span>1. Ha a linket új lapon szeretnénk megnyitni, a <code>target="_blank"</code> kódot kell használnunk.</span>
+                <select id="ex4_3_1">
+                    <option value="">Válassz...</option>
+                    <option value="I">Igaz (I)</option>
+                    <option value="H">Hamis (H)</option>
+                </select>
+            </div>
+            <div class="tf-row">
+                <span>2. Ha egy képet az <code>&lt;a&gt;</code> és <code>&lt;/a&gt;</code> címkék közé zárunk, akkor az a kép kattinthatóvá válik.</span>
+                <select id="ex4_3_2">
+                    <option value="">Válassz...</option>
+                    <option value="I">Igaz (I)</option>
+                    <option value="H">Hamis (H)</option>
+                </select>
+            </div>
+            <div class="tf-row">
+                <span>3. Ha a képnek csak a szélességét (<code>width</code>) adjuk meg, a böngésző hajlamos eltorzítani és összenyomni a képet.</span>
+                <select id="ex4_3_3">
+                    <option value="">Válassz...</option>
+                    <option value="I">Igaz (I)</option>
+                    <option value="H">Hamis (H)</option>
+                </select>
+            </div>
+        </div>
+
+        <button onclick="validateLesson4()">Feladatok Ellenőrzése</button>
+        <div id="resultBox" class="result-box"></div>
+    </div>
+
+    <script>
+        function validateLesson4() {
+            // 1. Feladat adatok
+            const r1 = document.getElementById('ex4_1_1').value.trim().toLowerCase();
+            const r2 = document.getElementById('ex4_1_2').value.trim().toLowerCase();
+            const r3 = document.getElementById('ex4_1_3').value.trim().toLowerCase();
+
+            // 2. Feladat adatok
+            const r4 = document.getElementById('ex4_2_correct').checked;
+
+            // 3. Feladat adatok
+            const r5 = document.getElementById('ex4_3_1').value;
+            const r6 = document.getElementById('ex4_3_2').value;
+            const r7 = document.getElementById('ex4_3_3').value;
+
+            const result = document.getElementById('resultBox');
+
+            // Kiértékelés
+            const f1_ok = (r1 === 'href') && (r2 === 'src') && (r3 === 'alt');
+            const f2_ok = r4;
+            const f3_ok = (r5 === 'I') && (r6 === 'I') && (r7 === 'H'); // a 3. hamis, mert arányosan számol, nem torzít
+
+            if (f1_ok && f2_ok && f3_ok) {
+                result.className = "result-box success";
+                result.innerText = "Kiváló munka! Mind a 3 feladat hibátlan lett. Sikerült elsajátítanod a linkek és képek használatát!";
+                result.style.display = "block";
+            } else {
+                result.className = "result-box error";
+                result.innerText = "Valamelyik válasz még nem stimmel. Figyelj a kisbetűs attribútumnevekre az 1. feladatban, a kvízre vagy az igaz/hamis opciókra!";
+                result.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

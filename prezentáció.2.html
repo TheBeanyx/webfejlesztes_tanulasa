@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2. Lecke - Szövegformázás és Hierarchia</title>
+    <style>
+        /* GLOBÁLIS STÍLUSOK */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #000000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Prezentációs Keret */
+        .presentation-frame {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            height: 600px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 3px solid #1e3a8a;
+            overflow: hidden;
+        }
+
+        /* Diák Alaphelyzete */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Címsorok és Szövegek */
+        h1 {
+            font-size: 3.2rem;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 span {
+            color: #22c55e;
+        }
+
+        h2 {
+            font-size: 2.3rem;
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            border-left: 8px solid #22c55e;
+            padding-left: 15px;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #334155;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        code {
+            background-color: #f1f5f9;
+            color: #1e3a8a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .code-block {
+            background-color: #000000;
+            color: #22c55e;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        /* Vezérlők */
+        .ui-container {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #15317e;
+        }
+
+        button.secondary {
+            background-color: #22c55e;
+        }
+
+        button.secondary:hover {
+            background-color: #16a34a;
+        }
+
+        .progress-indicator {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-frame">
+
+        <div class="slide active" id="slide-1">
+            <h1>Szövegek és <span>Hierarchia</span></h1>
+            <p style="text-align: center; font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">HTML Kurzus — 2. Lecke</p>
+            <p style="text-align: center; margin-top: 20px;">Ebben a leckében megtanuljuk, hogyan készítsünk címsorokat, bekezdéseket, és hogyan emeljünk ki fontos szavakat a szövegben.</p>
+        </div>
+
+        <div class="slide" id="slide-2">
+            <h2>1. Mik azok a Címsorok?</h2>
+            <p>A könyvekben vagy újságokban is vannak főcímek és alcímek. A HTML-ben ezeket <strong>Heading</strong>-nek nevezzük, és a <code>h</code> betűvel jelöljük őket.</p>
+            <p>A böngészőnek és a Google-nek is látnia kell, mi az oldal legfontosabb témája, és mik a kisebb alcímek. Erre való a címsorok hierarchiája.</p>
+        </div>
+
+        <div class="slide" id="slide-3">
+            <h2>2. A Rangsor: h1-től h6-ig</h2>
+            <p>A HTML-ben 6 szintű címsor létezik. A <code>&lt;h1&gt;</code> a legfontosabb (legnagyobb), a <code>&lt;h6&gt;</code> pedig a legkevésbé fontos (legkisebb).</p>
+            <div class="example-box">
+                <h1 style="font-size: 1.8rem; text-align: left; margin: 0; color: black;">Ez egy H1 (Főcím)</h1>
+                <h2 style="font-size: 1.4rem; margin: 5px 0 0 0; border: none; padding: 0; color: black;">Ez egy H2 (Alcím)</h2>
+                <h3 style="font-size: 1.1rem; margin: 5px 0 0 0; color: black;">Ez egy H3 (Al-alcím)</h3>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-4">
+            <h2>3. Az Arany szabály: Csak egy h1!</h2>
+            <p>Egy weboldalon <strong>szinte kötelezően csak egyetlen darab <code>&lt;h1&gt;</code> tag szerepelhet!</strong></p>
+            <p>Ez olyan, mint a könyv címe a borítón. Ha túl sok főcímet használsz, a Google nem fogja tudni, miről szól pontosan az oldalad, és hátrébb sorolhat a keresőben.</p>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <h2>4. A Sima Szöveg: &lt;p&gt;</h2>
+            <p>A címsorok alá jön a folyószöveg. Ezt a <strong>Paragraph</strong> (bekezdés) rövidítéséből a <code>&lt;p&gt;</code> címkével hozzuk létre.</p>
+            <p>Minden egyes <code>&lt;p&gt;</code> tag egy új bekezdést indít, és a böngésző automatikusan tesz egy kis üres helyet (margót) a bekezdések közé, hogy a szöveg jól olvasható legyen.</p>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <h2>5. Példa kód címsorra és szövegre</h2>
+            <p>A gyakorlatban ez így néz ki a <code>&lt;body&gt;</code>-n belül:</p>
+            <div class="code-block">
+                &lt;h1&gt;A kutyákról általában&lt;/h1&gt;<br>
+                &lt;p&gt;A kutya az ember legjobb barátja...&lt;/p&gt;<br>
+                &lt;h2&gt;Népszerű kutyafajták&lt;/h2&gt;<br>
+                &lt;p&gt;Rengeteg fajta létezik, például a golden retriever...&lt;/p&gt;
+            </div>
+        </div>
+
+        <div class="slide" id="slide-7">
+            <h2>6. Szövegek Kiemelése</h2>
+            <p>Néha szeretnénk bizonyos szavakat hangsúlyosabbá tenni a mondatban. Erre nem a címsorokat használjuk, hanem a kifejezetten szövegközi formázó címkéket.</p>
+            <p>A két legfontosabb ilyen címke a <strong>vastagítás</strong> és a <em>dőlt betűs kiemelés</em>. Nézzük meg őket pontosan!</p>
+        </div>
+
+        <div class="slide" id="slide-8">
+            <h2>7. Vastagítás: &lt;strong&gt;</h2>
+            <p>Ha egy fontos kulcsszót vagy kifejezést szeretnél **vastagon** megjeleníteni, zárd a <code>&lt;strong&gt;</code> címkék közé.</p>
+            <div class="example-box">
+                <p style="margin: 0;">Figyelem! A határidő <strong>ma éjfélkor</strong> lejár!</p>
+            </div>
+            <p style="margin-top: 15px;">Régebben a <code>&lt;b&gt;</code> (bold) tagot használták, de a modern webfejlesztésben a <code>strong</code> az elfogadott, mert ez jelzi a keresőknek is, hogy a szó kiemelten fontos.</p>
+        </div>
+
+        <div class="slide" id="slide-9">
+            <h2>8. Dőlt betű: &lt;em&gt;</h2>
+            <p>Ha egy szót meg szeretnél nyomni a mondatban, vagy külföldi kifejezést írsz, használd az <code>&lt;em&gt;</code> (Emphasis - hangsúly) címkét. Ez *döntötté* teszi a szöveget.</p>
+            <div class="example-box">
+                <p style="margin: 0;">Én <em>biztosan</em> nem oda tettem a kulcsot.</p>
+            </div>
+            <p style="margin-top: 15px;">Régen erre az <code>&lt;i&gt;</code> (italic) tagot használták, de ma már az <code>em</code> a szabványos megoldás.</p>
+        </div>
+
+        <div class="slide" id="slide-10">
+            <h2>9. Egymásba ágyazott kiemelések</h2>
+            <p>A kiemeléseket kombinálhatod is a bekezdéseken belül. Nagyon fontos a matematikai pontosságú zárási sorrend!</p>
+            <div class="code-block">
+                &lt;p&gt;Ez egy &lt;strong&gt;&lt;em&gt;nagyon fontos&lt;/em&gt;&lt;/strong&gt; szó.&lt;/p&gt;
+            </div>
+            <p style="margin-top: 15px;">Figyeld meg: mivel az <code>&lt;em&gt;</code> nyílt meg legbelül, annak kell bezáródnia legelőször (<code>&lt;/em&gt;</code>), és csak utána jöhet a <code>&lt;/strong&gt;</code>!</p>
+        </div>
+
+        <div class="slide" id="slide-11">
+            <h2>10. Új sor indítása: &lt;br&gt;</h2>
+            <p>Ha egy bekezdésen belül szeretnél új sort kezdeni anélkül, hogy új bekezdést (és nagy üres térközt) nyitnál, használd a <code>&lt;br&gt;</code> (break) címkét.</p>
+            <p><strong>Rendkívüli tulajdonság:</strong> a <code>&lt;br&gt;</code> egy önzáró tag! Nincs párja, nem kell mögé tenni semmit, magában áll a sor végén.</p>
+        </div>
+
+        <div class="slide" id="slide-12">
+            <h2>11. Összefoglaló táblázat</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Címke</th>
+                        <th>Mit csinál?</th>
+                        <th>Párja (lezárása)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>&lt;h1&gt; - &lt;h6&gt;</code></td>
+                        <td>Hierarchikus címsorok</td>
+                        <td>Van (kötelező)</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;p&gt;</code></td>
+                        <td>Sima szöveges bekezdés</td>
+                        <td>Van (kötelező)</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;strong&gt;</code></td>
+                        <td>Vastag betűs kiemelés</td>
+                        <td>Van (kötelező)</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;em&gt;</code></td>
+                        <td>Dőlt betűs hangsúly</td>
+                        <td>Van (kötelező)</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;br&gt;</code></td>
+                        <td>Ssortörés (új sor)</td>
+                        <td>Nincs (önzáró)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slide" id="slide-13">
+            <h2>12. Készülj a gyakorlásra!</h2>
+            <p>Most már mindent tudsz ahhoz, hogy strukturált szövegeket írj a weboldaladra. Ismered a rangsort és a kiemelések szabályait.</p>
+            <p>A következő lépésben kapsz egy interaktív feladatot, amivel élesben is letesztelheted ezt a tudást.</p>
+            <p style="font-weight: bold; color: #22c55e; text-align: center; margin-top: 20px;">Nyomj a gombra a befejezéshez!</p>
+        </div>
+
+    </div>
+
+    <div class="ui-container">
+        <div class="controls">
+            <button onclick="moveSlide(-1)">← Előző</button>
+            <div style="width: 20px;"></div>
+            <button class="secondary" onclick="moveSlide(1)">Következő →</button>
+        </div>
+        <div class="progress-indicator" id="progress">1 / 13 dia</div>
+    </div>
+
+    <script>
+        let activeIndex = 1;
+        const maxSlides = 13;
+
+        function moveSlide(step) {
+            let targetIndex = activeIndex + step;
+            if (targetIndex < 1 || targetIndex > maxSlides) return;
+            document.getElementById(`slide-${activeIndex}`).classList.remove('active');
+            activeIndex = targetIndex;
+            document.getElementById(`slide-${activeIndex}`).classList.add('active');
+            document.getElementById('progress').innerText = `${activeIndex} / ${maxSlides} dia`;
+        }
+    </script>
+</body>
+</html>

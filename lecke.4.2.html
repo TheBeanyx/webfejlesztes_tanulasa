@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. Lecke - Szöveges Gyakorló Feladatok</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #000000;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .challenge-container {
+            width: 100%;
+            max-width: 850px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #1e3a8a;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        h1 span {
+            color: #22c55e;
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #334155;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #1e3a8a;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #334155;
+            margin-bottom: 15px;
+        }
+
+        .task-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .code-sandbox {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .code-sandbox input {
+            background-color: #1e293b;
+            border: 2px solid #334155;
+            color: #22c55e;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            width: 130px;
+            font-weight: bold;
+            text-align: center;
+            outline: none;
+        }
+
+        .code-sandbox input:focus {
+            border-color: #22c55e;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background-color: #22c55e;
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #16a34a;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+
+        .success { background-color: #dcfce7; color: #15803d; border: 2px solid #bbf7d0; }
+        .error { background-color: #fee2e2; color: #b91c1c; border: 2px solid #fca5a5; }
+    </style>
+</head>
+<body>
+
+    <div class="challenge-container">
+        <h1>Kódolási Gyakorlat: <span>6 Szöveges Feladat</span></h1>
+        <p class="intro">Egészítsd ki a kódokat a leírások alapján! Figyelj a pontos karakterekre és értékekre.</p>
+
+        <h2>1. Feladat: Háromsoros szöveg sortöréssel</h2>
+        <div class="task-box">
+            <p><strong>Feladat:</strong> Törd a szöveget pontosan 3 sorba a megfelelő tag segítségével!</p>
+        </div>
+        <div class="code-sandbox">
+            &lt;p&gt;Ez az első sor.<input type="text" id="t1_1" placeholder="sortörés"><br>
+            Ez a második sor.<input type="text" id="t1_2" placeholder="sortörés"><br>
+            Ez pedig a harmadik sor.&lt;/p&gt;
+        </div>
+
+        <h2>2. Feladat: Szövegközi kiemelések</h2>
+        <div class="task-box">
+            <p><strong>Feladat:</strong> Emeld ki a "fontos" szót **vastagon**, a "hangsúlyos" szót pedig *dölten* a modern tagokkal!</p>
+        </div>
+        <div class="code-sandbox">
+            &lt;p&gt;Ez egy &lt;strong&gt;fontos&lt;/strong&gt; üzenet, ami egy <input type="text" id="t2_1" placeholder="nyitás">hangsúlyos<input type="text" id="t2_2" placeholder="lezárás"> szót is tartalmaz.&lt;/p&gt;
+        </div>
+
+        <h2>3. Feladat: Cica kép beágyazása mérettel</h2>
+        <div class="task-box">
+            <p><strong>Feladat:</strong> Ágyazd be a <code>cica.png</code> képet pontosan 200 pixel szélességgel és 150 pixel magassággal!</p>
+        </div>
+        <div class="code-sandbox">
+            &lt;img src="cica.png" alt="Cica" <input type="text" id="t3_1" placeholder="szélesség_attrib">="200" <input type="text" id="t3_2" placeholder="magasság_attrib">="150"&gt;
+        </div>
+
+        <h2>4. Feladat: Külső link beszúrása</h2>
+        <div class="task-box">
+            <p><strong>Feladat:</strong> Készíts egy linket a <code>youtube.com</code> oldalra, aminek a kattintható szövege: "kattints ide"!</p>
+        </div>
+        <div class="code-sandbox">
+            &lt;a href="https://youtube.com"&gt;<input type="text" id="t4_1" placeholder="szöveg" style="width:160px;"><input type="text" id="t4_2" placeholder="link_lezárása" style="width:90px;"&gt;
+        </div>
+
+        <h2>5. Feladat: Új lapos hivatkozás</h2>
+        <div class="task-box">
+            <p><strong>Feladat:</strong> Egészítsd ki a linket úgy, hogy kattintáskor szigorúan egy **új böngészőlapon** nyíljon meg!</p>
+        </div>
+        <div class="code-sandbox">
+            &lt;a href="https://google.com" <input type="text" id="t5_1" placeholder="attribútum">="_blank"&gt;Kereső&lt;/a&gt;
+        </div>
+
+        <h2>6. Feladat: Kötelező kép-kiegészítés</h2>
+        <div class="task-box">
+            <p><strong>Feladat:</strong> Add meg a képnek a kötelező alternatív leírást biztosító tulajdonságot!</p>
+        </div>
+        <div class="code-sandbox">
+            &lt;img src="kutya.jpg" <input type="text" id="t6_1" placeholder="attribútum">="Egy futó kutya"&gt;
+        </div>
+
+        <button onclick="validate6Tasks()">6 Feladat Ellenőrzése</button>
+        <div id="resultBox" class="result-box"></div>
+    </div>
+
+    <script>
+        function validate6Tasks() {
+            // Értékek begyűjtése
+            const v1_1 = document.getElementById('t1_1').value.trim().toLowerCase();
+            const v1_2 = document.getElementById('t1_2').value.trim().toLowerCase();
+            const v2_1 = document.getElementById('t2_1').value.trim().toLowerCase();
+            const v2_2 = document.getElementById('t2_2').value.trim().toLowerCase();
+            const v3_1 = document.getElementById('t3_1').value.trim().toLowerCase();
+            const v3_2 = document.getElementById('t3_2').value.trim().toLowerCase();
+            const v4_1 = document.getElementById('t4_1').value.trim(); // itt számít a kis/nagybetű a szövegnél
+            const v4_2 = document.getElementById('t4_2').value.trim().toLowerCase();
+            const v5_1 = document.getElementById('t5_1').value.trim().toLowerCase();
+            const v6_1 = document.getElementById('t6_1').value.trim().toLowerCase();
+
+            // Kiértékelések
+            const f1 = (v1_1 === '<br>' || v1_1 === '<br/>') && (v1_2 === '<br>' || v1_2 === '<br/>');
+            const f2 = (v2_1 === '<em>') && (v2_2 === '</em>');
+            const f3 = (v3_1 === 'width') && (v3_2 === 'height');
+            const f4 = (v4_1.toLowerCase() === 'kattints ide') && (v4_2 === '</a>');
+            const f5 = (v5_1 === 'target');
+            const f6 = (v6_1 === 'alt');
+
+            const result = document.getElementById('resultBox');
+            result.style.display = "block";
+
+            if (f1 && f2 && f3 && f4 && f5 && f6) {
+                result.className = "result-box success";
+                result.innerText = "Minden feladat hibátlan! Szuperül oldottad meg a gyakorlati szöveges és méretezési feladatokat is.";
+            } else {
+                result.className = "result-box error";
+                result.innerText = "Valamelyik kód még pontatlan. Ellenőrizd a sortöréseket, a méretattribútumokat (width/height), vagy a linkek szövegeit és lezárásait!";
+            }
+        }
+    </script>
+</body>
+</html>

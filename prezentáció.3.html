@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Lecke - Listák és Felsorolások</title>
+    <style>
+        /* GLOBÁLIS STÍLUSOK */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #000000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Prezentációs Keret */
+        .presentation-frame {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            height: 600px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 3px solid #1e3a8a;
+            overflow: hidden;
+        }
+
+        /* Diák Alaphelyzete */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Címsorok és Szövegek */
+        h1 {
+            font-size: 3.2rem;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 span {
+            color: #22c55e;
+        }
+
+        h2 {
+            font-size: 2.3rem;
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            border-left: 8px solid #22c55e;
+            padding-left: 15px;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #334155;
+            margin-bottom: 20px;
+        }
+
+        .slide ul, .slide ol {
+            margin-left: 40px;
+            margin-bottom: 20px;
+        }
+
+        .slide li {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: #000000;
+        }
+
+        code {
+            background-color: #f1f5f9;
+            color: #1e3a8a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .code-block {
+            background-color: #000000;
+            color: #22c55e;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        /* Vezérlők */
+        .ui-container {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #15317e;
+        }
+
+        button.secondary {
+            background-color: #22c55e;
+        }
+
+        button.secondary:hover {
+            background-color: #16a34a;
+        }
+
+        .progress-indicator {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-frame">
+
+        <div class="slide active" id="slide-1">
+            <h1>Listák és <span>Felsorolások</span></h1>
+            <p style="text-align: center; font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">HTML Kurzus — 3. Lecke</p>
+            <p style="text-align: center; margin-top: 20px;">Ebből a leckéből megtanulod, hogyan rendezd az információkat pontozott vagy számozott listákba, ami a webes menük alapja is.</p>
+        </div>
+
+        <div class="slide" id="slide-2">
+            <h2>1. Miért használunk listákat?</h2>
+            <p>A weboldalakon rengeteg olyan információ van, amit csoportosítani kell. Ilyenek a navigációs menük, a cikkek tulajdonságai, vagy a lépésről lépésre követhető útmutatók.</p>
+            <p>A HTML-ben a listák mindig **két szintből** állnak: van egy külső "lista konténer", és azon belül vannak a "lista elemek".</p>
+        </div>
+
+        <div class="slide" id="slide-3">
+            <h2>2. A két fő listatípus</h2>
+            <p>A HTML alapvetően kétféle listát ismer, a sorrend fontosságától függően:</p>
+            <ol>
+                <li><strong>Rendezetlen lista:</strong> Egyszerű pontozott felsorolás (pl. bevásárlólista).</li>
+                <li><strong>Rendezett lista:</strong> Számozott felsorolás, ahol számít a sorrend (pl. egy recept lépései).</li>
+            </ol>
+        </div>
+
+        <div class="slide" id="slide-4">
+            <h2>3. Rendezetlen lista: &lt;ul&gt;</h2>
+            <p>A pontozott felsorolást az <strong>Unordered List</strong> (rendezetlen lista) rövidítéséből az <code>&lt;ul&gt;</code> taggel nyitjuk meg.</p>
+            <p>Ez a tag önmagában még nem jelenít meg szöveget, ez csak a "keret", ami szól a böngészőnek, hogy itt most egy csoportosított felsorolás következik.</p>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <h2>4. A lista elemei: &lt;li&gt;</h2>
+            <p>Ahhoz, hogy ténylegesen legyenek elemeink a listában, a tagokat a <strong>List Item</strong> (lista elem) rövidítéséből az <code>&lt;li&gt;</code> címkék közé kell zárni.</p>
+            <p>Az <code>&lt;li&gt;</code> tagokat <strong>mindig</strong> az <code>&lt;ul&gt;</code> vagy <code>&lt;ol&gt;</code> tageken belülre kell ágyazni!</p>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <h2>5. Példa egy pontozott listára</h2>
+            <div class="code-block">
+                &lt;ul&gt;<br>
+                &nbsp;&nbsp;&lt;li&gt;Tej&lt;/li&gt;<br>
+                &nbsp;&nbsp;&lt;li&gt;Kenyér&lt;/li&gt;<br>
+                &nbsp;&nbsp;&lt;li&gt;Tojás&lt;/li&gt;<br>
+                &lt;/ul&gt;
+            </div>
+            <div class="example-box">
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Tej</li>
+                    <li>Kenyér</li>
+                    <li>Tojás</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-7">
+            <h2>6. Rendezett lista: &lt;ol&gt;</h2>
+            <p>Ha azt szeretnéd, hogy a böngésző automatikusan megszámozza az elemeket (1, 2, 3...), akkor az <strong>Ordered List</strong> (rendezett lista) rövidítését, az <code>&lt;ol&gt;</code> tagot kell használnod.</p>
+            <p>A belső elemek itt is pontosan ugyanúgy <code>&lt;li&gt;</code> címkék lesznek, a számozást a böngésző magától intézi!</p>
+        </div>
+
+        <div class="slide" id="slide-8">
+            <h2>7. Példa a számozott listára</h2>
+            <div class="code-block">
+                &lt;ol&gt;<br>
+                &nbsp;&nbsp;&lt;li&gt;Kapcsold be a gépet&lt;/li&gt;<br>
+                &nbsp;&nbsp;&lt;li&gt;Nyiss meg egy szerkesztőt&lt;/li&gt;<br>
+                &nbsp;&nbsp;&lt;li&gt;Írd meg a kódot&lt;/li&gt;<br>
+                &lt;/ol&gt;
+            </div>
+            <div class="example-box">
+                <ol style="margin: 0; padding-left: 20px;">
+                    <li>Kapcsold be a gépet</li>
+                    <li>Nyiss meg egy szerkesztőt</li>
+                    <li>Írd meg a kódot</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-9">
+            <h2>8. Listák egymásba ágyazása</h2>
+            <p>A HTML-ben csinálhatsz "al-listákat" is. Ehhez egy <code>&lt;li&gt;</code> tagon belülre kell nyitnod egy teljesen új listát.</p>
+            <p>Ez rendkívül hasznos például olyan navigációs menüknél, ahol a főmenüre rávíve az egeret legördülnek az almenük.</p>
+        </div>
+
+        <div class="slide" id="slide-10">
+            <h2>9. Példa az al-listára</h2>
+            <p>Figyeld meg, hogyan lakik a belső lista a külső elemben:</p>
+            <div class="code-block" style="font-size: 0.95rem; padding: 15px;">
+                &lt;ul&gt;<br>
+                &nbsp;&nbsp;&lt;li&gt;Gyümölcsök<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Alma&lt;/li&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Banán&lt;/li&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br>
+                &nbsp;&nbsp;&lt;/li&gt;<br>
+                &lt;/ul&gt;
+            </div>
+        </div>
+
+        <div class="slide" id="slide-11">
+            <h2>10. A lezárás itt is kötelező!</h2>
+            <p>Mind az <code>&lt;ul&gt;</code>, mind az <code>&lt;ol&gt;</code>, mind az <code>&lt;li&gt;</code> tageket **kötelező lezárni** perjellel!</p>
+            <p>Ha nyitva hagysz egy <code>&lt;li&gt;</code>-t vagy egy fő listát, a böngésző azt fogja hinni, hogy a weboldal összes többi eleme is a lista része, és mindent behúzva, pontozva fog mutatni.</p>
+        </div>
+
+        <div class="slide" id="slide-12">
+            <h2>11. Összefoglalás</h2>
+            <p>Rögzítsük a legfontosabb szabályokat:</p>
+            <ul>
+                <li>Pontozott felsorolás = <code>&lt;ul&gt;</code></li>
+                <li>Számozott felsorolás = <code>&lt;ol&gt;</code></li>
+                <li>Konkrét lista elem = <code>&lt;li&gt;</code></li>
+                <li>Az <code>&lt;li&gt;</code> csak lista konténeren belül létezhet!</li>
+            </ul>
+        </div>
+
+        <div class="slide" id="slide-13">
+            <h2>12. Jöhet a gyakorlás?</h2>
+            <p>Sikeresen átvetted a listák elméletét. Most már képes vagy rendezett adatokat kitenni a weboldaladra.</p>
+            <p>A következő lépésben következik a kért **3 interaktív feladat**, amivel élesben is tesztelheted a tudásodat!</p>
+            <p style="font-weight: bold; color: #22c55e; text-align: center; margin-top: 20px;">Kattints a gombra, ha készen állsz!</p>
+        </div>
+
+    </div>
+
+    <div class="ui-container">
+        <div class="controls">
+            <button onclick="moveSlide(-1)">← Előző</button>
+            <div style="width: 20px;"></div>
+            <button class="secondary" onclick="moveSlide(1)">Következő →</button>
+        </div>
+        <div class="progress-indicator" id="progress">1 / 13 dia</div>
+    </div>
+
+    <script>
+        let activeIndex = 1;
+        const maxSlides = 13;
+
+        function moveSlide(step) {
+            let targetIndex = activeIndex + step;
+            if (targetIndex < 1 || targetIndex > maxSlides) return;
+            document.getElementById(`slide-${activeIndex}`).classList.remove('active');
+            activeIndex = targetIndex;
+            document.getElementById(`slide-${activeIndex}`).classList.add('active');
+            document.getElementById('progress').innerText = `${activeIndex} / ${maxSlides} dia`;
+        }
+    </script>
+</body>
+</html>
